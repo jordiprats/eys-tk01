@@ -12,11 +12,11 @@ db = MySQLdb.connect(host="localhost",    # your host, usually localhost
 #  you execute all the queries you need
 cur = db.cursor()
 
-for x in range(0, random.randint(3,10)):
+for x in range(0, random.randint(10,100)):
     # Use all the SQL you like
     cur.execute("SELECT * FROM demo ORDER BY RAND()")
     # print all the first cell of all the rows
     for row in cur.fetchall():
-        sleep(0.001)
+        sleep(0.01)
 
 db.close()
