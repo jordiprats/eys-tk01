@@ -5,8 +5,18 @@ rm -fr /var/lib/mysql/*
 
 /usr/bin/mysqld_safe --basedir=/usr &
 
-sleep 5
+mysqladmin ping
+MYSQL_ALIVE=$?
+while [ $MYSQL_ALIVE -ne 0 ];
+do
+  sleep 1
+  mysqladmin ping
+  MYSQL_ALIVE=$?
+done
+
 echo "create database demo" | mysql
 echo "grant all on demo.* to demo@localhost identified by 'demopassword'" | mysql
 echo "create table demo(id int not null auto_increment, name text, primary key (id))" | mysql demo
 for i in $(ls /etc); do echo "insert into demo(name) values('$i');"; done | mysql demo
+
+pkill mysqld
