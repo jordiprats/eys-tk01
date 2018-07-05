@@ -2,4 +2,4 @@
 
 /usr/local/bin/init.sh
 
-ps -fea | grep 
+exec /usr/bin/supervisord
