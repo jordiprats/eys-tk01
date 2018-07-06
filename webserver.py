@@ -10,10 +10,6 @@ class myHandler(BaseHTTPRequestHandler):
 
     #Handler for the GET requests
     def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type','text/html')
-        self.end_headers()
-
         try:
             db = MySQLdb.connect(host="localhost",    # your host, usually localhost
                                  user="demo",         # your username
@@ -23,22 +19,25 @@ class myHandler(BaseHTTPRequestHandler):
             # you must create a Cursor object. It will let
             #  you execute all the queries you need
             cur = db.cursor()
+            # Use all the SQL you like
+            cur.execute("SELECT * FROM demo ORDER BY RAND()")
 
-            for x in range(0, random.randint(10,100)):
-                # Use all the SQL you like
-                cur.execute("SELECT * FROM demo ORDER BY RAND()")
-                # print all the first cell of all the rows
-                for row in cur.fetchall():
-                    self.wfile.write(row)
+            self.send_response(200)
+            self.send_header('Content-type','text/html')
+            self.end_headers()
+
+            # print all the first cell of all the rows
+            for row in cur.fetchall():
+                self.wfile.write(str(row)+"<br>")
         except MySQLdb.Error, e:
-            self.wfile.write("connection refused")
+            self.send_response(500)
+            self.send_header('Content-type','text/html')
+            self.end_headers()
+            self.wfile.write("please try again later")
 
         finally:
             db.close()
 
-
-        # Send the html message
-        self.wfile.write("Hello World !")
         return
 
 try:
