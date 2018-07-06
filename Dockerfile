@@ -22,4 +22,10 @@ RUN chmod +x /usr/local/bin/appserver.sh
 COPY mysqld.ini /etc/supervisord.d/
 COPY appserver.ini /etc/supervisord.d/
 
+RUN mv /usr/bin/systemctl /usr/bin/.systemctl.orig
+RUN ln -s /usr/bin/supervisorctl /usr/bin/systemctl
+
+COPY service.sh /usr/bin/service
+RUN chmod +x /usr/bin/service
+
 CMD ["/usr/local/bin/startup.sh"]
