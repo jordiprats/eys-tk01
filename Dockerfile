@@ -33,6 +33,11 @@ RUN chmod +x /usr/bin/service
 COPY systemctl.sh /usr/bin/systemctl
 RUN chmod +x /usr/bin/systemctl
 
+#
+# debug tools
+#
+RUN yum install net-tools strace -y
+
 EXPOSE 8080
 
 CMD ["/usr/local/bin/startup.sh"]
