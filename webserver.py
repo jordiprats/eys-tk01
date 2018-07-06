@@ -57,14 +57,10 @@ class myHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type','text/html')
             self.end_headers()
 
-            # print all the first cell of all the rows
-            for row in cur.fetchall():
-                self.wfile.write(str(row)+"<br>")
         except MySQLdb.Error, e:
             self.send_response(500)
             self.send_header('Content-type','text/html')
             self.end_headers()
-            self.wfile.write("please try again later")
 
         finally:
             db.close()
