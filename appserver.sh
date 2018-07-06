@@ -1,3 +1,3 @@
 #!/bin/bash
 
-yes | xargs -P 14 /usr/bin/python /usr/local/bin/appserver.py
+yes start | xargs -P 14 -n 1 /usr/bin/python /usr/local/bin/appserver.py
