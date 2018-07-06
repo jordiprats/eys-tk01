@@ -14,23 +14,28 @@ class myHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type','text/html')
         self.end_headers()
 
-        db = MySQLdb.connect(host="localhost",    # your host, usually localhost
-                             user="demo",         # your username
-                             passwd="demopassword",  # your password
-                             db="demo")        # name of the data base
+        try:
+            db = MySQLdb.connect(host="localhost",    # your host, usually localhost
+                                 user="demo",         # your username
+                                 passwd="demopassword",  # your password
+                                 db="demo")        # name of the data base
 
-        # you must create a Cursor object. It will let
-        #  you execute all the queries you need
-        cur = db.cursor()
+            # you must create a Cursor object. It will let
+            #  you execute all the queries you need
+            cur = db.cursor()
 
-        for x in range(0, random.randint(10,100)):
-            # Use all the SQL you like
-            cur.execute("SELECT * FROM demo ORDER BY RAND()")
-            # print all the first cell of all the rows
-            for row in cur.fetchall():
-                self.wfile.write(row)
+            for x in range(0, random.randint(10,100)):
+                # Use all the SQL you like
+                cur.execute("SELECT * FROM demo ORDER BY RAND()")
+                # print all the first cell of all the rows
+                for row in cur.fetchall():
+                    self.wfile.write(row)
+        except MySQLdb.Error, e:
+            self.wfile.write("connection refused")
 
-        db.close()
+        finally:
+            db.close()
+
 
         # Send the html message
         self.wfile.write("Hello World !")
