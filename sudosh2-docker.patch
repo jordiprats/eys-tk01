@@ -1,0 +1,13 @@
+diff -Naur sudosh2/src/sudosh.c sudosh2.patched/src/sudosh.c
+--- sudosh2/src/sudosh.c	2018-07-09 09:13:57.244640512 +0000
++++ sudosh2.patched/src/sudosh.c	2018-07-09 09:14:14.396678317 +0000
+@@ -293,9 +293,7 @@
+     }
+   else
+     {
+-      fprintf (stderr, "%s: couldn't get your controlling terminal.\n",
+-	       progname);
+-      exit (EXIT_FAILURE);
++      strncpy (user.from, "unknown", sizeof("unknown"));
+     }
+   user.pw = getpwuid ((uid_t) getuid ());
