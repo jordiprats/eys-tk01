@@ -3,6 +3,9 @@
     {
       "team": "MySQL team",
       "subject": "Unresponsive application",
-      "description": ""
+      "description": "Webpage is currently not responding, please fix ASAP",
+      "visibility": "published",
+      "startup_cmd": "docker run -d -p 8080:8080 -t enlargeyourskills/tk01",
+      "login_cmd": "docker exec -i -t  $(docker ps  | grep enlargeyourskills/tk01 | head -n1 | awk '{ print $1 }') bash",
     }
 }
