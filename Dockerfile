@@ -21,9 +21,19 @@ RUN chmod +x /usr/local/bin/appserver.py
 RUN chmod +x /usr/local/bin/appserver.sh
 RUN chmod +x /usr/local/bin/webserver.py
 
+RUN chattr +i /usr/local/bin/init.sh
+RUN chattr +i /usr/local/bin/startup.sh
+RUN chattr +i /usr/local/bin/appserver.py
+RUN chattr +i /usr/local/bin/appserver.sh
+RUN chattr +i /usr/local/bin/webserver.py
+
 COPY mysqld.ini /etc/supervisord.d/
 COPY appserver.ini /etc/supervisord.d/
 COPY webserver.ini /etc/supervisord.d/
+
+RUN chattr +i /etc/supervisord.d/mysqld.ini
+RUN chattr +i /etc/supervisord.d/appserver.ini
+RUN chattr +i /etc/supervisord.d/webserver.ini
 
 RUN mv /usr/bin/systemctl /usr/bin/.systemctl.orig
 
