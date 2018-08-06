@@ -7,7 +7,7 @@
       "visibility": "published",
       "startup_cmd": "docker run -d -p 8080:8080 -t enlargeyourskills/tk01",
       "login_cmd": "docker exec -i -t  $(docker ps  | grep enlargeyourskills/tk01 | head -n1 | awk '{ print $1 }') bash",
-      "extra_info": "You can check if the webpage is respoding using http://localhost:8080 once the environment is started. There is a propietary webserver(/usr/local/bin/webserver.py) and an appserver(/usr/local/bin/appserver.py) - meaning there's no configuration that needs to be tweaked there",
+      "extra_info": "You can check if the webpage is respoding using http://localhost:8080 once the environment is started. There is a propietary webserver(/usr/local/bin/webserver.py) and an appserver(/usr/local/bin/appserver.py) - meaning there's no configuration that needs to be tweaked but there's no problem in looking at it's source code",
       "stop_cmd": "docker stop $(docker ps  | grep enlargeyourskills/tk01 | head -n1 | awk '{ print $1 }'); docker rm $(docker ps  | grep enlargeyourskills/tk01 | head -n1 | awk '{ print $1 }')"
     }
 }
